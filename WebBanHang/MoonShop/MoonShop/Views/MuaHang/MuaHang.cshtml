@@ -1,0 +1,128 @@
+﻿@using MoonShop.Models
+@model SanPham
+@{
+    ViewBag.Title = "MuaHang";
+    Layout = "~/Views/Share/LayoutHome.cshtml";
+}
+
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Bootstrap icons-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="~/css/styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript">
+    function Submit() {
+        confirm("Mua hàng thành công ?")
+    }
+</script>
+
+@using (Html.BeginForm("MuaHang"))
+{
+    var item = Session["user1"] as MoonShop.Models.KhachHang;
+    <div class="container">
+        <div class="row">
+            <div class="bbb_slider_container">
+                <div class="owl-carousel owl-theme bbb_slider">
+                    <table>
+                        <tr>
+                            <td>
+                                <input maxlength="100" type="text" name="txt_id" required="required" class="form-control" value="@Model.ID_SanPham" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="~/imgmp/@Model.HinhSanPham" style="width:100%;height:200px" />
+                            </td>
+                            <td>
+                                <div class="bbb_content">
+                                    <div class="bbb_category"><a href="#">"@Model.TenSanPham"</a></div>
+                                </div>
+                                <input maxlength="100" type="text" name="txt_gia" required="required" class="form-control" value="@Model.GiaBan" />
+                                <br />
+                                Số lượng
+                                <input type="number" id="quantity" name="quantity" value="1" />
+                                <input onclick="var result = document.getElementById('quantity');result.value--;" type='button' value='-' />
+                                <input onclick="var result = document.getElementById('quantity');result.value++;" type='button' value='+' />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-horizontal">
+
+                <form role="form">
+                    <fieldset>
+                        <legend>Nhập vào thông tin của bạn</legend>
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="card-holder-name">Your Email</label>
+                            <div class="col-sm-9">
+
+                                <input maxlength="100" type="text" value="@item.Email" name="txt_mail" required="required" class="form-control" placeholder="Enter Email" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="card-number">Họ và tên</label>
+                            <div class="col-sm-9">
+                                <input maxlength="100" type="text" name="txt_hoten" value="@item.HoTen_KH" required="required" class="form-control" placeholder="Enter Name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="card-number">Số điện thoại</label>
+                            <div class="col-sm-9">
+                                <input maxlength="100" type="text" name="txt_sdt" required="required" class="form-control" placeholder="Enter hone Number" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="card-number">Địa chỉ</label>
+                            <div class="col-sm-9">
+                                <input maxlength="100" type="text" name="txt_diachi" required="required" class="form-control" placeholder="Enter Address" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label" for="card-number">Quận /Huyện</label>
+                                <div class="col-sm-6" style="padding-left:8px">
+                                    <input maxlength="100" type="text" name="txt_quanhuyen" required="required" class="form-control" placeholder="Enter City" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label" for="card-number">Tỉnh/Thành phố</label>
+                                <div class="col-sm-6" style="padding:0px">
+                                    <input maxlength="100" type="text" name="txt_tinhtp" required="required" class="form-control" placeholder="Enter State/Province" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="card-number">Hình thức thanh toán</label>
+                            <div class="col-sm-9">
+                                <select required="required" class="form-control" style="height:50px">
+                                    <option value="0">Thanh toán khi nhận hàng</option>
+                                    <option value="pakistan">Thanh toán qua thẻ MasterCard-Visa(Không khả dụng)</option>
+                                    <option value="usa">Thanh toán qua internet banking (Không khả dụng)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" style="background-color:lightpink" type="submit" onclick="return Submit()">Thanh toán</button>
+        </div>
+    </div>
+}
+
+

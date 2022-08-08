@@ -1,0 +1,114 @@
+﻿@using MoonShop.Models
+@model List<SanPham>
+@{
+    ViewBag.Title = "HomeTrangChu";
+    Layout = "~/Views/Share/LayoutHome.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+@using (Html.BeginForm("HomeTrangChu", "Home"))
+{
+    <div class="row" style="margin:0px; padding:10px">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8" >
+            <div class="row">
+                <input class="form-control mr-2 w-100" name="txt_search" type="search" placeholder="Nhập tên sản phẩm" aria-label="Search" />
+            </div>         
+        </div>
+        <div class="col-sm-1" >
+            <button class="btn btn-outline-dark " type="submit">Search</button>
+        </div>
+    </div>
+}
+<!-- Header-->
+<header class="row">
+    <div id="demo" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" style="border-radius:100%; width:10px; height:10px; margin:10px; "></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1" style="border-radius:100%; width:10px; height:10px; margin:10px"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2" style="border-radius:100%; width:10px; height:10px; margin:10px"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="3" style="border-radius:100%; width:10px; height:10px; margin:10px"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="4" style="border-radius:100%; width:10px; height:10px; margin:10px"></button>
+        </div>
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Banner/banner-quang-cao-my-pham.jpg" class="d-block" style="width:100%;height:450px">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Banner/nguyen-tac-thiet-ke-banner-pham-dep-ngat-ngay-08-1.jpg" class="d-block" style="width: 100%; height: 450px">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Banner/thiết-kế-banner-mỹ-phẩm-61.png" class="d-block" style="width: 100%; height: 450px">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Banner/my-pham-focallure-co-tot-khong-top-cac-san-pham-dang-mua-nhat-cua-focallure-202203011218209921.jpg" class="d-block" style="width: 100%; height: 450px">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Banner/my-pham-Skincare-1200x800.jpg" class="d-block" style="width: 100%; height: 450px">
+            </div>
+        </div>
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</header>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5">
+
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="~/imgmp/@item.HinhSanPham" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center" >
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">@item.TenSanPham</h5>
+                                <!-- Product price-->
+                                @item.GiaBan
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="@Url.Action("ThemGioHang","GioHang",new {id= @item.ID_SanPham })">Thêm giỏ hàng</a></div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="@Url.Action("MuaHang","MuaHang",new {id= @item.ID_SanPham })">Mua Ngay</a></div>
+                        </div>
+                    </div>
+                </div>
+            }
+    </div>
+</section>
+
+<!-- Footer-->
+<footer class="auto-style1" style="background: #FFC3C3; color: #ffffff">
+    <div class="container">
+        <p class="m-0 text-center text-white">
+            <br />
+            <a style="font-weight:bold">THÔNG TIN LIÊN HỆ</a><br />
+            <a>Tư vấn mua hàng (Miễn phí)</a><br />
+            <a>Hỗ trợ kỹ thuật</a><br />
+            <a>Hỗ trợ thanh toán</a><br />
+            <a>Hotline: 0333688185</a><br />
+            <a>Góp ý, khiếu nại dịch vụ (8h00-22h00) @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</a><br />
+        </p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
